@@ -6,24 +6,24 @@ public class Monster {
     private int damage = 0;
     private String monsterType = "name";
 
-    private int getHealth() {
+    public int getHealth() {
         return this.health;
     }
-    private void setHealth(int pHealth) {
+    public void setHealth(int pHealth) {
         this.health = pHealth;
     }
 
-    private int getDamage() {
+    public int getDamage() {
         return this.damage;
     }
-    private void setDamage(int pDamage) {
+    public void setDamage(int pDamage) {
         this.damage = pDamage;
     }
 
-    private String getMonsterType() {
+    public String getMonsterType() {
         return this.monsterType;
     }
-    private void setMonsterType(String pMonsterType) {
+    public void setMonsterType(String pMonsterType) {
         this.monsterType = pMonsterType;
     }
 

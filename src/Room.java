@@ -4,10 +4,10 @@
 public class Room {
     private boolean visited = false;
 
-    private boolean getVisited() {
+    public boolean getVisited() {
         return this.visited;
     }
-    private void setVisited(boolean pVisited) {
+    public void setVisited(boolean pVisited) {
         this.visited = pVisited;
     }
 

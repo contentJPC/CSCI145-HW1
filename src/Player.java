@@ -9,38 +9,38 @@ public class Player {
     private double lootModifier = 1.0;
 
     //gets and sets
-    private int getHealth() {
+    public int getHealth() {
         return this.health;
     }
-    private void setHealth(int pHealth) {
+    public void setHealth(int pHealth) {
         this.health = pHealth;
     }
 
-    private int getGold() {
+    public int getGold() {
         return this.gold;
     }
-    private void setGold(int pGold) {
+    public void setGold(int pGold) {
         this.gold = pGold;
     }
 
-    private int getDamage() {
+    public int getDamage() {
         return this.damage;
     }
-    private void setDamage(int pDamage) {
+    public void setDamage(int pDamage) {
         this.damage = pDamage;
     }
 
-    private String getPlayerClass() {
+    public String getPlayerClass() {
         return this.playerClass;
     }
-    private void setPlayerClass(String pPlayerClass) {
+    public void setPlayerClass(String pPlayerClass) {
         this.playerClass = pPlayerClass;
     }
 
-    private double getLootModifieretLootModifier() {
+    public double getLootModifieretLootModifier() {
         return this.lootModifier;
     }
-    private void setLootModifier(double pLootModifier) {
+    public void setLootModifier(double pLootModifier) {
         this.lootModifier = pLootModifier;
     }
 
