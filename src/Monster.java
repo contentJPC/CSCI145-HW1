@@ -1,6 +1,3 @@
-/**
- * Created by cormiej on 1/23/19.
- */
 public class Monster {
     private int health = 0;
     private int damage = 0;
