@@ -28,4 +28,8 @@ public class Monster {
     public void attack(Player pPlayer) {
 
     }
+
+    public void onHit(int pDamage) {
+
+    }
 }

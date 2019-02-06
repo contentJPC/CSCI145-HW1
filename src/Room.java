@@ -1,5 +1,5 @@
 public class Room {
-    private boolean visited = false;
+    private boolean visited;
 
     public boolean getVisited() {
         return this.visited;
@@ -12,7 +12,7 @@ public class Room {
         setVisited(true);
     }
 
-    public boolean visited() {
+    public boolean hasVisited() {
         return getVisited();
     }
 }

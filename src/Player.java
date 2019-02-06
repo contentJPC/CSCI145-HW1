@@ -1,9 +1,9 @@
 public class Player {
-    private int health = 0;
-    private int gold = 0;
-    private int damage = 0;
-    private String playerClass = "Mage";
-    private double lootModifier = 1.0;
+    private int health;
+    private int gold;
+    private int damage;
+    private String playerClass;
+    private double lootModifier;
 
     //gets and sets
     public int getHealth() {
@@ -43,7 +43,7 @@ public class Player {
 
     //Constructor, no empty one needed because player can only start with 1 of 2
     //stat options which will be fed into the constructor on character creation
-    public void Player(int pHealth, int pGold, int pDamage, String pPlayerClass, double pLootModifier) {
+    public Player(int pHealth, int pGold, int pDamage, String pPlayerClass, double pLootModifier) {
         setHealth(pHealth);
         setGold(pGold);
         setDamage(pDamage);
