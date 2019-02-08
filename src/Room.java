@@ -1,18 +1,48 @@
+package com.company;
+import java.util.Random;
+import java.util.Scanner;
+
 public class Room {
-    private boolean visited;
+    private boolean Visited;
 
-    public boolean getVisited() {
-        return this.visited;
-    }
-    public void setVisited(boolean pVisited) {
-        this.visited = pVisited;
+    public boolean GetVisited() {
+        return this.Visited;
     }
 
-    public void enter(Player pPlayer) {
-        setVisited(true);
+    public void SetVisited(boolean pVisited) {
+        Visited = pVisited;
     }
 
-    public boolean hasVisited() {
-        return getVisited();
+    public void Enter(Player pPlayer) {
+        SetVisited( true);
+        Random random = new Random();
+        Scanner scanner = new Scanner(System.in);
+        Monster monster = new Monster();
+        String monsterType = monster.getMonsterType();
+        int monsterDamage = monster.getDamage();
+        int monsterHealth = monster.getHealth();
+        boolean lootOrMonster = new random.nextBoolean();
+        if (lootOrMonster) {
+            //monster attack
+            System.out.println("You just encountered a" + monsterType);
+            System.out.println("A " + monsterType + " has " + monsterHealth + " health and does " + monsterDamage + " damage.");
+            System.out.print("Press 1 to attack or 2 to run.");
+            int attackOrRun = scanner.nextInt();
+            if (attackOrRun == 1) {
+                System.out.println("You've chosen to attack");
+            }
+            else {
+
+            }
+        }
+        else {
+            //loot
+
+        }
     }
+
+    public boolean Visited() {
+        return GetVisited();
+    }
+
 }
