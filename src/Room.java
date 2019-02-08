@@ -1,4 +1,4 @@
-package com.company;
+//package com.company;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,7 +21,7 @@ public class Room {
         String monsterType = monster.getMonsterType();
         int monsterDamage = monster.getDamage();
         int monsterHealth = monster.getHealth();
-        boolean lootOrMonster = new random.nextBoolean();
+        boolean lootOrMonster = random.nextBoolean();
         if (lootOrMonster) {
             //monster attack
             System.out.println("You just encountered a" + monsterType);
