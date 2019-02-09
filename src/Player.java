@@ -51,18 +51,16 @@ public class Player {
         setLootModifier(pLootModifier);
     }
 
-
-
     public void attack(Monster pMonster) {
-
+        //hitting the monster, call for monster's onHit
     }
     public void onHit(int pDamage) {
-
+        //getting hit, lower health and check if health is below 0
     }
     public void onHeal(int pHeal) {
-
+        //increase health
     }
     public void onLoot(int pGold) {
-
+        //increase gold, check if gold is above 100
     }
 }

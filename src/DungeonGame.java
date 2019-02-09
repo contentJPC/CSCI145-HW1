@@ -6,6 +6,7 @@ public class DungeonGame {
     Scanner scanner = new Scanner(System.in);
 
     public void play() {
+        map = new DungeonMap();
         System.out.println("=================================================");
         System.out.println("You are in a dungeon!");
         System.out.println("There are monster, gold, and health potions in each room.");
@@ -15,7 +16,7 @@ public class DungeonGame {
         while (player.getGold() < 100 && player.getHealth() > 0) {
             System.out.println("=================================================");
             System.out.println(" ");
-            //map.print();
+            map.print();
             System.out.println("GP = " + player.getGold());
             System.out.println("HP = " + player.getHealth());
             System.out.println(" ");
@@ -48,7 +49,6 @@ public class DungeonGame {
                 this.player.setPlayerClass("Thief");
                 this.player.setLootModifier(1.2);
             }
-            System.out.println(this.player.getPlayerClass());
             System.out.println(" ");
     }
 }

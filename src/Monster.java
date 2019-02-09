@@ -26,10 +26,10 @@ public class Monster {
 
 
     public void attack(Player pPlayer) {
-
+        //damage player, call for player's onHit
     }
 
     public void onHit(int pDamage) {
-
+        //lower health based on player damage, check if below 0
     }
 }
