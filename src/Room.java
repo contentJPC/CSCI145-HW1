@@ -13,7 +13,7 @@ public class Room {
     }
 
     public void Enter(Player pPlayer) {
-        SetVisited( true);
+        SetVisited(true);
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
 
@@ -40,31 +40,61 @@ public class Room {
                 int attackOrRun = scanner.nextInt();
 
                 if (attackOrRun == 1) {
-                        System.out.println("You've chosen to attack");
-                        playerHealth = playerHealth - monsterDamage;
-                        System.out.println("The " + monsterType + " did " + monsterDamage);
-                        monsterHealth = monsterHealth - playerDamage;
-                        System.out.println("You did " + playerDamage + " damage to the " + monster);
-                }
-
-                else if (attackOrRun == 2) {
+                    //attack
+                    System.out.println("You've chosen to attack");
+                    playerHealth = playerHealth - monsterDamage;
+                    System.out.println("The " + monsterType + " did " + monsterDamage);
+                    monsterHealth = monsterHealth - playerDamage;
+                    System.out.println("You did " + playerDamage + " damage to the " + monster);
+                } else if (attackOrRun == 2) {
+                    //run
                     playerHealth = playerHealth - monsterDamage;
                     System.out.println("You've chosen to run");
+                    System.out.println("You lost " + monsterDamage + "health");
                     break;
                 }
             }
 
             else {
-                //loot
+                boolean goldOrHealing = random.nextBoolean();
+                if (goldOrHealing) {
+                    //pick up gold
+                    int amountOfGold = random.nextInt(15);
+                    playerGold = playerGold + amountOfGold;
+                    System.out.println("You picked up " + amountOfGold + " gold!");
+                } else {
+                    //gain health
+                    int amountOfHealth = random.nextInt(15);
+                    if (playerClass.equals("Warrior")) {
+                        if (playerHealth + amountOfHealth < 100) {
+                            //if total player hp < max
+                            playerHealth = playerHealth + amountOfHealth;
+                        }
 
+                        else if (playerHealth + amountOfHealth > 100) {
+                            //if total player hp > max
+                            playerHealth = 100;
+                        }
+
+                        else if (playerClass.equals("Thief")) {
+                            if (playerHealth + amountOfHealth < 70) {
+                                //if total player hp < max
+                                playerHealth = playerHealth + amountOfHealth;
+                            }
+
+                            else if (playerHealth + amountOfHealth > 70) {
+                                //if total player hp > max
+                                playerHealth = 70;
+                            }
+
+                        }
+                    }
+                }
             }
         }
+
+        public boolean hasVisited() {
+            return GetVisited();
+        }
     }
-
-
-
-    public boolean Visited() {
-        return GetVisited();
-    }
-
 }
