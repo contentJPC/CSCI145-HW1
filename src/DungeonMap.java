@@ -5,8 +5,8 @@ public class DungeonMap {
     public DungeonMap(int pRows, int pColumns, Player pPlayer) {
         this.player = pPlayer;
         rooms = new Room[pRows][pColumns];
-        for (int i=0;i<rooms[0].length;i++) {
-            for (int j=0;j<rooms[1].length;j++) {
+        for (int i=0;i<rooms.length;i++) {
+            for (int j=0;j<rooms[i].length;j++) {
                 rooms[i][j] = new Room();
             }
         }
@@ -15,7 +15,7 @@ public class DungeonMap {
     public void print() {
         int counter = 0;
         printTopAndBot();
-        for (int i=0;i<rooms[0].length;i++) {
+        for (int i=0;i<rooms.length;i++) {
             for (int j = 0;j<rooms[1].length;j++) {
                 if (counter == 0) {
                     System.out.print("|");
@@ -37,11 +37,12 @@ public class DungeonMap {
             counter = 0;
         }
         printTopAndBot();
+        System.out.println("x = " + player.getXCoord() + " y = " + player.getYCoord());
     }
 
     public void printTopAndBot() {
         System.out.print("+");
-        for (int i=0;i<rooms[0].length;i++) {
+        for (int i=0;i<rooms[1].length;i++) {
             System.out.print(" - ");
         }
         System.out.println("+");

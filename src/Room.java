@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Room {
-    private boolean visited = false;
+    private boolean visited = true;
 
     public boolean getVisited() {
         return this.visited;
@@ -13,19 +13,24 @@ public class Room {
     }
 
     public void enter(Player pPlayer) {
-        setVisited(true);
-        Random random = new Random();
-        Player player = pPlayer;
+        if (!visited) {
+            setVisited(true);
+            Random random = new Random();
+            Player player = pPlayer;
 
-        int randomEncounter = random.nextInt(3);
-        System.out.println(randomEncounter);
-        switch (randomEncounter) {
-            case 0: combat(player);
-            break;
-            case 1: heal(player);
-            break;
-            case 2: gold(player);
-            break;
+            int randomEncounter = random.nextInt(3);
+            System.out.println(randomEncounter);
+            switch (randomEncounter) {
+                case 0: combat(player);
+                    break;
+                case 1: heal(player);
+                    break;
+                case 2: gold(player);
+                    break;
+            }
+        }
+        else if (visited) {
+            System.out.println("You've already been in this room");
         }
     }
 
@@ -35,7 +40,22 @@ public class Room {
 
     public void combat(Player pPlayer) {
         Scanner scanner = new Scanner(System.in);
-        Monster monster = new Monster(500,1000,"Curious Test Subject");
+        Random random = new Random();
+
+        Monster monster = new Monster(1,1,"temp");
+
+        int randomMonster = random.nextInt(4);
+        switch (randomMonster) {
+            case 0: monster = new Monster(6,10,"Goblin");
+            break;
+            case 1: monster = new Monster(12,15,"Skeleton");
+                break;
+            case 2: monster = new Monster(18,20,"Orc");
+                break;
+            case 3: monster = new Monster(55,5,"Deneke");
+                break;
+        }
+
 
         while (monster.getHealth() > 0) {
             //monster attack
@@ -61,13 +81,13 @@ public class Room {
     public void heal(Player pPlayer) {
         //gain health
         Random random = new Random();
-        int amountOfHealth = random.nextInt(15);
+        int amountOfHealth = 10 + random.nextInt(15);
         pPlayer.onHeal(amountOfHealth);
     }
 
     public void gold(Player pPlayer) {
         Random random = new Random();
-        int amountOfGold = random.nextInt(30);
+        int amountOfGold = 10 + random.nextInt(15);
         pPlayer.onLoot(amountOfGold);
     }
 }

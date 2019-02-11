@@ -85,7 +85,8 @@ public class Player {
         System.out.println("You've been healed by " + pHeal + " points!");
     }
     public void onLoot(int pGold) {
-        gold = gold + pGold;
-        System.out.println("You found " + pGold + " gold piece(s)!");
+        double moddedGold = pGold * lootModifier;
+        gold = gold + (int)moddedGold;
+        System.out.println("You found " + (int)moddedGold + " gold piece(s)!");
     }
 }
