@@ -24,7 +24,6 @@ public class Monster {
         this.monsterType = pMonsterType;
     }
 
-
     public void attack(Player pPlayer) {
         //damage player, call for player's onHit
     }

@@ -2,18 +2,18 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Room {
-    private boolean Visited;
+    private boolean visited;
 
-    public boolean GetVisited() {
-        return this.Visited;
+    public boolean getVisited() {
+        return this.visited;
     }
 
-    public void SetVisited(boolean pVisited) {
-        Visited = pVisited;
+    public void setVisited(boolean pVisited) {
+        visited = pVisited;
     }
 
     public void Enter(Player pPlayer) {
-        SetVisited(true);
+        setVisited(true);
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
 
@@ -22,7 +22,7 @@ public class Room {
         int monsterDamage = monster.getDamage();
         int monsterHealth = monster.getHealth();
 
-        Player player = new Player(1, 1, 1, "Unset", 1);
+        Player player = pPlayer;
         String playerClass = player.getPlayerClass();
         int playerHealth = player.getHealth();
         int playerDamage = player.getDamage();
@@ -30,34 +30,30 @@ public class Room {
         double playerLootModifier = player.getLootModifieretLootModifier();
 
         boolean lootOrMonster = random.nextBoolean();
+        while (monsterHealth > 0) {
             if (lootOrMonster) {
-                while (monsterHealth > 0) {
-                    //monster attack
-                    System.out.println("You just encountered a" + monsterType);
-                    System.out.print(" that has " + monsterHealth + " health and does " + monsterDamage + " damage.");
-                    System.out.println();
-                    System.out.print("Press 1 to attack or 2 to run.");
-                    int attackOrRun = scanner.nextInt();
+                //monster attack
+                System.out.println("You just encountered a" + monsterType);
+                System.out.print(" that has " + monsterHealth + " health and does " + monsterDamage + " damage.");
+                System.out.println();
+                System.out.print("Press 1 to attack or 2 to run.");
+                int attackOrRun = scanner.nextInt();
 
-                    if (attackOrRun == 1) {
-                        //attack
-                        System.out.println("You've chosen to attack");
-                        playerHealth = playerHealth - monsterDamage;
-                        System.out.println("The " + monsterType + " did " + monsterDamage);
-                        monsterHealth = monsterHealth - playerDamage;
-                        System.out.println("You did " + playerDamage + " damage to the " + monster);
-                    } else if (attackOrRun == 2) {
-                        //run
-                        playerHealth = playerHealth - monsterDamage;
-                        System.out.println("You've chosen to run");
-                        System.out.println("You lost " + monsterDamage + "health");
-                        break;
-                    }
+                if (attackOrRun == 1) {
+                    //attack
+                    System.out.println("You've chosen to attack");
+                    playerHealth = playerHealth - monsterDamage;
+                    System.out.println("The " + monsterType + " did " + monsterDamage);
+                    monsterHealth = monsterHealth - playerDamage;
+                    System.out.println("You did " + playerDamage + " damage to the " + monster);
+                } else if (attackOrRun == 2) {
+                    //run
+                    playerHealth = playerHealth - monsterDamage;
+                    System.out.println("You've chosen to run");
+                    System.out.println("You lost " + monsterDamage + "health");
+                    break;
                 }
-
-            }
-
-            else {
+            } else {
                 boolean goldOrHealing = random.nextBoolean();
                 if (goldOrHealing) {
                     //pick up gold
@@ -71,20 +67,14 @@ public class Room {
                         if (playerHealth + amountOfHealth < 100) {
                             //if total player hp < max
                             playerHealth = playerHealth + amountOfHealth;
-                        }
-
-                        else if (playerHealth + amountOfHealth > 100) {
+                        } else if (playerHealth + amountOfHealth > 100) {
                             //if total player hp > max
                             playerHealth = 100;
-                        }
-
-                        else if (playerClass.equals("Thief")) {
+                        } else if (playerClass.equals("Thief")) {
                             if (playerHealth + amountOfHealth < 70) {
                                 //if total player hp < max
                                 playerHealth = playerHealth + amountOfHealth;
-                            }
-
-                            else if (playerHealth + amountOfHealth > 70) {
+                            } else if (playerHealth + amountOfHealth > 70) {
                                 //if total player hp > max
                                 playerHealth = 70;
                             }
@@ -93,8 +83,9 @@ public class Room {
                     }
                 }
             }
+        }
     }
     public boolean hasVisited() {
-        return GetVisited();
+        return getVisited();
     }
 }
