@@ -1,8 +1,10 @@
 public class DungeonMap {
-    private Room[][] rooms = new Room[5][5];
+    private Room[][] rooms;
     private Player player;
 
-    public DungeonMap(int pRows, int pColumns) {
+    public DungeonMap(int pRows, int pColumns, Player pPlayer) {
+        this.player = pPlayer;
+        rooms = new Room[pRows][pColumns];
         for (int i=0;i<rooms[0].length;i++) {
             for (int j=0;j<rooms[1].length;j++) {
                 rooms[i][j] = new Room();
@@ -12,28 +14,36 @@ public class DungeonMap {
 
     public void print() {
         int counter = 0;
-        System.out.println("+-----+");
+        printTopAndBot();
         for (int i=0;i<rooms[0].length;i++) {
             for (int j = 0;j<rooms[1].length;j++) {
                 if (counter == 0) {
                     System.out.print("|");
                 }
                 counter = counter+1;
-//                if (rooms[i][j] == rooms[player.getXCoord()][player.getYCoord()]) {
-//                    System.out.print("W");
-//                }
-                if (rooms[i][j].hasVisited() == true) {
-                    System.out.print("*");
+                if (i == player.getXCoord() && j == player.getYCoord()) {
+                    System.out.print(" W ");
+                }
+                else if (rooms[i][j].hasVisited() == true) {
+                    System.out.print(" * ");
                 }
                 else if (rooms[i][j].hasVisited() == false) {
-                    System.out.print(".");
+                    System.out.print("   ");
                 }
-                if (counter == 5) {
+                if (counter == rooms[0].length) {
                     System.out.println("|");
                 }
             }
             counter = 0;
         }
-        System.out.println("+-----+");
+        printTopAndBot();
+    }
+
+    public void printTopAndBot() {
+        System.out.print("+");
+        for (int i=0;i<rooms[0].length;i++) {
+            System.out.print(" - ");
+        }
+        System.out.println("+");
     }
 }

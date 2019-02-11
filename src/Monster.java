@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Monster {
     private int health = 0;
     private int damage = 0;
@@ -24,11 +26,24 @@ public class Monster {
         this.monsterType = pMonsterType;
     }
 
+    public Monster(int pHealth, int pDamage, String pName) {
+        setHealth(pHealth);
+        setDamage(pDamage);
+        setMonsterType(pName);
+    }
+
     public void attack(Player pPlayer) {
-        //damage player, call for player's onHit
+        Random random = new Random();
+        int randomDamage = random.nextInt(damage);
+        pPlayer.onHit(randomDamage);
+        System.out.println("The " + monsterType + " attacks for " + randomDamage + " damage");
     }
 
     public void onHit(int pDamage) {
-        //lower health based on player damage, check if below 0
+        health = health - pDamage;
+
+        if (health <= 0) {
+            System.out.println(monsterType + " has died");
+        }
     }
 }

@@ -4,8 +4,8 @@ public class Player {
     private int damage;
     private String playerClass;
     private double lootModifier;
-    private int xCoord;
-    private int yCoord;
+    private int xCoord = 0;
+    private int yCoord = 0;
 
     //gets and sets
     public int getHealth() {
@@ -68,15 +68,24 @@ public class Player {
     }
 
     public void attack(Monster pMonster) {
-        //hitting the monster, call for monster's onHit
+        System.out.println("You hit the " + pMonster.getMonsterType() + " for " + damage + " damage");
+        pMonster.onHit(damage);
     }
     public void onHit(int pDamage) {
-        //getting hit, lower health and check if health is below 0
+        health = health - pDamage;
     }
     public void onHeal(int pHeal) {
-        //increase health
+        health = health + pHeal;
+        if (playerClass.equals("Warrior") && health > 100) {
+            health = 100;
+        }
+        else if (playerClass.equals("Thief") && health > 70) {
+            health = 70;
+        }
+        System.out.println("You've been healed by " + pHeal + " points!");
     }
     public void onLoot(int pGold) {
-        //increase gold, check if gold is above 100
+        gold = gold + pGold;
+        System.out.println("You found " + pGold + " gold piece(s)!");
     }
 }

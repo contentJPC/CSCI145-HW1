@@ -2,90 +2,72 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Room {
-    private boolean visited;
+    private boolean visited = false;
 
     public boolean getVisited() {
         return this.visited;
     }
 
     public void setVisited(boolean pVisited) {
-        visited = pVisited;
+        this.visited = pVisited;
     }
 
-    public void Enter(Player pPlayer) {
+    public void enter(Player pPlayer) {
         setVisited(true);
         Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
-
-        Monster monster = new Monster();
-        String monsterType = monster.getMonsterType();
-        int monsterDamage = monster.getDamage();
-        int monsterHealth = monster.getHealth();
-
         Player player = pPlayer;
-        String playerClass = player.getPlayerClass();
-        int playerHealth = player.getHealth();
-        int playerDamage = player.getDamage();
-        int playerGold = player.getGold();
-        double playerLootModifier = player.getLootModifieretLootModifier();
 
-        boolean lootOrMonster = random.nextBoolean();
-        while (monsterHealth > 0) {
-            if (lootOrMonster) {
-                //monster attack
-                System.out.println("You just encountered a" + monsterType);
-                System.out.print(" that has " + monsterHealth + " health and does " + monsterDamage + " damage.");
-                System.out.println();
-                System.out.print("Press 1 to attack or 2 to run.");
-                int attackOrRun = scanner.nextInt();
+        int randomEncounter = random.nextInt(3);
+        System.out.println(randomEncounter);
+        switch (randomEncounter) {
+            case 0: combat(player);
+            break;
+            case 1: heal(player);
+            break;
+            case 2: gold(player);
+            break;
+        }
+    }
 
-                if (attackOrRun == 1) {
-                    //attack
-                    System.out.println("You've chosen to attack");
-                    playerHealth = playerHealth - monsterDamage;
-                    System.out.println("The " + monsterType + " did " + monsterDamage);
-                    monsterHealth = monsterHealth - playerDamage;
-                    System.out.println("You did " + playerDamage + " damage to the " + monster);
-                } else if (attackOrRun == 2) {
-                    //run
-                    playerHealth = playerHealth - monsterDamage;
-                    System.out.println("You've chosen to run");
-                    System.out.println("You lost " + monsterDamage + "health");
+    public boolean hasVisited() {
+        return getVisited();
+    }
+
+    public void combat(Player pPlayer) {
+        Scanner scanner = new Scanner(System.in);
+        Monster monster = new Monster(500,1000,"Curious Test Subject");
+
+        while (monster.getHealth() > 0) {
+            //monster attack
+            System.out.println("In front of you is a " + monster.getMonsterType() + " that has " + monster.getHealth() + " health and does " + monster.getDamage() + " damage");
+            System.out.print("Press 1 to attack or 2 to run : ");
+            int attackOrRun = scanner.nextInt();
+
+            monster.attack(pPlayer);
+            if (attackOrRun == 1) {
+                //attack
+                if (pPlayer.getHealth() <= 0) {
                     break;
                 }
-            } else {
-                boolean goldOrHealing = random.nextBoolean();
-                if (goldOrHealing) {
-                    //pick up gold
-                    int amountOfGold = random.nextInt(15);
-                    playerGold = playerGold + amountOfGold;
-                    System.out.println("You picked up " + amountOfGold + " gold!");
-                } else {
-                    //gain health
-                    int amountOfHealth = random.nextInt(15);
-                    if (playerClass.equals("Warrior")) {
-                        if (playerHealth + amountOfHealth < 100) {
-                            //if total player hp < max
-                            playerHealth = playerHealth + amountOfHealth;
-                        } else if (playerHealth + amountOfHealth > 100) {
-                            //if total player hp > max
-                            playerHealth = 100;
-                        } else if (playerClass.equals("Thief")) {
-                            if (playerHealth + amountOfHealth < 70) {
-                                //if total player hp < max
-                                playerHealth = playerHealth + amountOfHealth;
-                            } else if (playerHealth + amountOfHealth > 70) {
-                                //if total player hp > max
-                                playerHealth = 70;
-                            }
-
-                        }
-                    }
-                }
+                pPlayer.attack(monster);
+            } else if (attackOrRun == 2) {
+                //run
+                System.out.println("You escape the room, but were hit while your back was turned!");
+                break;
             }
         }
     }
-    public boolean hasVisited() {
-        return getVisited();
+
+    public void heal(Player pPlayer) {
+        //gain health
+        Random random = new Random();
+        int amountOfHealth = random.nextInt(15);
+        pPlayer.onHeal(amountOfHealth);
+    }
+
+    public void gold(Player pPlayer) {
+        Random random = new Random();
+        int amountOfGold = random.nextInt(30);
+        pPlayer.onLoot(amountOfGold);
     }
 }
