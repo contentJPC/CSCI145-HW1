@@ -10,6 +10,7 @@ public class DungeonMap {
                 rooms[i][j] = new Room();
             }
         }
+        rooms[player.getXCoord()][player.getYCoord()].setVisited(true);
     }
 
     public void print() {
@@ -21,8 +22,14 @@ public class DungeonMap {
                     System.out.print("|");
                 }
                 counter = counter+1;
+                //if (i == playerX && j == playerY) {
                 if (i == player.getXCoord() && j == player.getYCoord()) {
-                    System.out.print(" W ");
+                    if (player.getPlayerClass().equals("Warrior")){
+                        System.out.print(" W ");
+                    }
+                    else if (player.getPlayerClass().equals("Thief")){
+                        System.out.print(" T ");
+                    }
                 }
                 else if (rooms[i][j].hasVisited() == true) {
                     System.out.print(" * ");
@@ -37,14 +44,17 @@ public class DungeonMap {
             counter = 0;
         }
         printTopAndBot();
-        System.out.println("x = " + player.getXCoord() + " y = " + player.getYCoord());
     }
 
-    public void printTopAndBot() {
+    private void printTopAndBot() {
         System.out.print("+");
         for (int i=0;i<rooms[1].length;i++) {
             System.out.print(" - ");
         }
         System.out.println("+");
+    }
+
+    public void enterRoom(Player pPlayer) {
+        rooms[pPlayer.getXCoord()][pPlayer.getYCoord()].enter(pPlayer);
     }
 }

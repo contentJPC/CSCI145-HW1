@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Room {
-    private boolean visited = true;
+    private boolean visited = false;
 
     public boolean getVisited() {
         return this.visited;
@@ -38,7 +38,7 @@ public class Room {
         return getVisited();
     }
 
-    public void combat(Player pPlayer) {
+    private void combat(Player pPlayer) {
         Scanner scanner = new Scanner(System.in);
         Random random = new Random();
 
@@ -78,14 +78,14 @@ public class Room {
         }
     }
 
-    public void heal(Player pPlayer) {
+    private void heal(Player pPlayer) {
         //gain health
         Random random = new Random();
         int amountOfHealth = 10 + random.nextInt(15);
         pPlayer.onHeal(amountOfHealth);
     }
 
-    public void gold(Player pPlayer) {
+    private void gold(Player pPlayer) {
         Random random = new Random();
         int amountOfGold = 10 + random.nextInt(15);
         pPlayer.onLoot(amountOfGold);
