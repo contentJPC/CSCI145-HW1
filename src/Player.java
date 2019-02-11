@@ -4,6 +4,8 @@ public class Player {
     private int damage;
     private String playerClass;
     private double lootModifier;
+    private int xCoord;
+    private int yCoord;
 
     //gets and sets
     public int getHealth() {
@@ -41,6 +43,20 @@ public class Player {
         this.lootModifier = pLootModifier;
     }
 
+    public int getXCoord() {
+        return this.xCoord;
+    }
+    public void setXCoord(int pXCoord) {
+        this.xCoord = pXCoord;
+    }
+
+    public int getYCoord() {
+        return this.yCoord;
+    }
+    public void setYCoord(int pYCoord) {
+        this.yCoord = pYCoord;
+    }
+
     //Constructor, no empty one needed because player can only start with 1 of 2
     //stat options which will be fed into the constructor on character creation
     public Player(int pHealth, int pGold, int pDamage, String pPlayerClass, double pLootModifier) {
@@ -56,11 +72,6 @@ public class Player {
     }
     public void onHit(int pDamage) {
         //getting hit, lower health and check if health is below 0
-        health = health - damage();
-
-        if (health <= 0) {
-            System.out.println("YOU ARE DEAD");
-        }
     }
     public void onHeal(int pHeal) {
         //increase health
