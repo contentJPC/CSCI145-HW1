@@ -92,9 +92,8 @@ public class Room {
                 }
             }
         }
-
-        public boolean hasVisited() {
-            return GetVisited();
-        }
+    }
+    public boolean hasVisited() {
+        return GetVisited();
     }
 }
