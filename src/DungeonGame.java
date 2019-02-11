@@ -6,7 +6,7 @@ public class DungeonGame {
     Scanner scanner = new Scanner(System.in);
 
     public void play() {
-        map = new DungeonMap();
+        map = new DungeonMap(10,10);
         System.out.println("=================================================");
         System.out.println("You are in a dungeon!");
         System.out.println("There are monster, gold, and health potions in each room.");
@@ -19,13 +19,37 @@ public class DungeonGame {
             map.print();
             System.out.println("GP = " + player.getGold());
             System.out.println("HP = " + player.getHealth());
-            System.out.println(" ");
-            System.out.println("Select a door: [W] up, [S] down, [A] left, [D] right ==> ");
             //get input
+            boolean running = true;
+            while (running == true) {
+                System.out.println(" ");
+                System.out.println("Select a door: [W] up, [S] down, [A] left, [D] right ==> ");
+                String input = scanner.next();
+                if (input.toLowerCase().equals("w")) {
+                    player.setXCoord(player.getXCoord()+1);
+                    running = false;
+                }
+                else if (input.toLowerCase().equals("a")) {
+                    player.setXCoord(player.getXCoord()-1);
+                    running = false;
+                }
+                else if (input.toLowerCase().equals("s")) {
+                    player.setYCoord(player.getYCoord()-1);
+                    running = false;
+                }
+                else if (input.toLowerCase().equals("d")) {
+                    player.setYCoord(player.getYCoord()+1);
+                    running = false;
+                }
+                else {
+                    System.out.println("please enter a proper input");
+                }
+            }
             System.out.println("You open a door and move through ...");
+            System.out.println("");
             //encounter message
             //encounter, give player options if combat
-            int temp = scanner.nextInt();
+            //int freeze = scanner.nextInt();
         }
     }
 
@@ -41,6 +65,8 @@ public class DungeonGame {
                 this.player.setDamage(15);
                 this.player.setPlayerClass("Warrior");
                 this.player.setLootModifier(1);
+                this.player.setXCoord(0);
+                this.player.setYCoord(0);
             }
             else if (playerChoice == 2) {
                 this.player.setHealth(70);
@@ -48,6 +74,8 @@ public class DungeonGame {
                 this.player.setDamage(10);
                 this.player.setPlayerClass("Thief");
                 this.player.setLootModifier(1.2);
+                this.player.setXCoord(0);
+                this.player.setYCoord(0);
             }
             System.out.println(" ");
     }
