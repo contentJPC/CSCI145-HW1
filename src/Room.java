@@ -30,29 +30,31 @@ public class Room {
         double playerLootModifier = player.getLootModifieretLootModifier();
 
         boolean lootOrMonster = random.nextBoolean();
-        while (monsterHealth > 0) {
             if (lootOrMonster) {
-                //monster attack
-                System.out.println("You just encountered a" + monsterType);
-                System.out.print(" that has " + monsterHealth + " health and does " + monsterDamage + " damage.");
-                System.out.println();
-                System.out.print("Press 1 to attack or 2 to run.");
-                int attackOrRun = scanner.nextInt();
+                while (monsterHealth > 0) {
+                    //monster attack
+                    System.out.println("You just encountered a" + monsterType);
+                    System.out.print(" that has " + monsterHealth + " health and does " + monsterDamage + " damage.");
+                    System.out.println();
+                    System.out.print("Press 1 to attack or 2 to run.");
+                    int attackOrRun = scanner.nextInt();
 
-                if (attackOrRun == 1) {
-                    //attack
-                    System.out.println("You've chosen to attack");
-                    playerHealth = playerHealth - monsterDamage;
-                    System.out.println("The " + monsterType + " did " + monsterDamage);
-                    monsterHealth = monsterHealth - playerDamage;
-                    System.out.println("You did " + playerDamage + " damage to the " + monster);
-                } else if (attackOrRun == 2) {
-                    //run
-                    playerHealth = playerHealth - monsterDamage;
-                    System.out.println("You've chosen to run");
-                    System.out.println("You lost " + monsterDamage + "health");
-                    break;
+                    if (attackOrRun == 1) {
+                        //attack
+                        System.out.println("You've chosen to attack");
+                        playerHealth = playerHealth - monsterDamage;
+                        System.out.println("The " + monsterType + " did " + monsterDamage);
+                        monsterHealth = monsterHealth - playerDamage;
+                        System.out.println("You did " + playerDamage + " damage to the " + monster);
+                    } else if (attackOrRun == 2) {
+                        //run
+                        playerHealth = playerHealth - monsterDamage;
+                        System.out.println("You've chosen to run");
+                        System.out.println("You lost " + monsterDamage + "health");
+                        break;
+                    }
                 }
+
             }
 
             else {
@@ -91,7 +93,6 @@ public class Room {
                     }
                 }
             }
-        }
     }
     public boolean hasVisited() {
         return GetVisited();
