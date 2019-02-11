@@ -56,6 +56,11 @@ public class Player {
     }
     public void onHit(int pDamage) {
         //getting hit, lower health and check if health is below 0
+        health = health - damage();
+
+        if (health <= 0) {
+            System.out.println("YOU ARE DEAD");
+        }
     }
     public void onHeal(int pHeal) {
         //increase health
