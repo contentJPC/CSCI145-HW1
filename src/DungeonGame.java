@@ -30,7 +30,17 @@ public class DungeonGame {
             System.out.println("[1] Warrior");
             System.out.println("[2] Thief");
             System.out.print("==> ");
-            int playerChoice = scanner.nextInt();
+            int playerChoice;
+            while (true) {
+                try {
+                    playerChoice = scanner.nextInt();
+                    break;
+                }
+                catch (Exception ex){
+                    System.out.println("Please enter a valid input");
+                    scanner.nextLine();
+                }
+            }
             if (playerChoice == 1) {
                 player = new Player(100,0,15,"Warrior",1);
             }

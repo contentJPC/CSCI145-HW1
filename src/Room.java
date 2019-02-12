@@ -1,8 +1,10 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Room {
     private boolean visited = false;
+    private int attackOrRun = 0;
 
     public boolean getVisited() {
         return this.visited;
@@ -61,7 +63,16 @@ public class Room {
             //monster attack
             System.out.println("In front of you is a " + monster.getMonsterType() + " that has " + monster.getHealth() + " health and does " + monster.getDamage() + " damage");
             System.out.print("Press 1 to attack or 2 to run : ");
-            int attackOrRun = scanner.nextInt();
+            while (true) {
+                try {
+                    attackOrRun = scanner.nextInt();
+                    break;
+                }
+                catch (InputMismatchException ex){
+                    System.out.println("Please enter a valid input");
+                    scanner.nextLine();
+                }
+            }
 
             monster.attack(pPlayer);
             if (attackOrRun == 1) {
@@ -70,10 +81,14 @@ public class Room {
                     break;
                 }
                 pPlayer.attack(monster);
-            } else if (attackOrRun == 2) {
+            }
+            else if (attackOrRun == 2) {
                 //run
                 System.out.println("You escape the room, but were hit while your back was turned!");
                 break;
+            }
+            else {
+                System.out.println("Please enter a valid input");
             }
         }
     }
